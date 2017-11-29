@@ -143,7 +143,7 @@ long dwlib_initialize(dwlib_process_stopped_callback_t process_stopped_callback)
 
     debugwatchdogdriver_image_buf = mmap(0, debugwatchdogdriver_image_sb.st_size, PROT_READ|PROT_EXEC, MAP_PRIVATE, debugwatchdogdriver_image_fd, 0);
     if (debugwatchdogdriver_image_buf == NULL) {
-    	fatal_error(-1);
+    	handable_fatal_error(-1);
     	goto cleanup;
     }
 
