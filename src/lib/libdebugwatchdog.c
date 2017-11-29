@@ -548,9 +548,18 @@ static char* get_path_to_library_directory(void) {
 		goto cleanup;
 	}
 	count = readlink("/proc/self/exe", executable_full_path, PATH_MAX);
-	if (count == -1) {
+	/* Fail if we cannot read the link or if the name is too long
+	 * and it was truncated by readlink */
+	if (count == -1 || count == PATH_MAX) {
 		goto cleanup;
 	}
+	/* man page readlink(2) says
+	 *  "readlink() does not append a null byte to buf"
+	 * So we put an explict 0 here to be sure that we will not
+	 * overrun the buffer later
+	 * */
+	executable_full_path[count] = 0;
+
 	executable_full_path_ptr = dirname(executable_full_path);
 	executable_directory_length = strlen(executable_full_path_ptr);
 	ret = (char*)malloc(executable_directory_length + 1);
