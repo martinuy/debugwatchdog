@@ -533,7 +533,7 @@ static char* get_path_to_file_with_base(const char* file) {
 	strcat(path_to_file_with_base, path_to_library_directory);
 	strcat(path_to_file_with_base, "/");
 	strcat(path_to_file_with_base, file);
-	path_to_file_with_base[path_to_file_with_base_length] = 0;
+	path_to_file_with_base[path_to_file_with_base_length-1] = 0;
 end:
 	return path_to_file_with_base;
 }
