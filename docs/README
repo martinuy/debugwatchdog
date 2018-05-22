@@ -1,15 +1,13 @@
 Debug Watchdog
 =============================
 
-Debug Watchdog is a tool for globally monitoring your Linux system and
-stopping chosen executable binaries immediately after launched. This
-enables to attach a debugger from the first instruction or to explore
-binary parameters -even for short-living processes-. Every executable
-binary is caught: no matter which user launched it, when nor for how
-long the process is expected to live. This is achieved by patching the
-system calls table in kernel spaces and hooking the sys_execve system
-call. The original system table values are restored when Debug Watchdog
-is turned off.
+Debug Watchdog is a tool to globally monitor your Linux system and
+stop watched executable binaries immediately after launched. This
+allows to attach a debugger on the first instruction and to explore
+binary parameters. Every executable binary is caught: no matter who
+launched it, when or how long the process lives. To achieve this,
+kernel syscalls table is patched and sys_execve hooked. Original
+syscalls table values are restored when Debug Watchdog is turned off.
 
 Debug Watchdog has the following components:
 
@@ -34,13 +32,13 @@ kernel module has to be dynamically loaded. "root" user usually
 satisfies this condition.
 
 Run the automated test to make sure that your system meets the 
-requirements and binaries will be caught: ./bin/debugwatchdogtest
+requirements and binaries are caught: ./bin/debugwatchdogtest
 
 Run from the UI: ./bin/debugwatchdogui
 
 Debug Watchdog is known to work in the following systems:
 
- * Fedora 25 - Linux kernel 4.12.12-200
+ * Fedora 25 - Linux kernel 4.13.16-101
 
 How to build
 =============================
@@ -61,11 +59,20 @@ Config:
 Run builder:
 
  * ./deploy.sh
-  * Binaries will be placed in "bin" folder.
+  * Binaries will be placed in "bin" folder, and "bin.tar.gz" file (packing all binaries) generated.
 
 
 Changelog
 =============================
+
+Version: 1.1 - 2018-05-22
+
+ * Bug fixes
+ * Documentation enhanced
+ * Minor code style improvements
+ * Minor build system improvements
+
+.............................
 
 Version: 1.0 - 2017-11-10
 
@@ -81,7 +88,7 @@ Debug Watchdog is under GPL license. See docs/gpl.txt for
 further information.
 
 Original author: Martin Balao (martin.uy)
-Contributors: -
+Contributors: Martin Di Paola (@eldipa at GitHub.com)
 
 Want to contribute? Join us on GitHub [1] :-)
 

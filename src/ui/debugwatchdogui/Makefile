@@ -33,10 +33,10 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = debugwatchdogui1.0.0
-DISTDIR = ./.tmp/debugwatchdogui1.0.0
+DISTDIR = /home/martin/local_lab/dev/debugwatchdog_2/debugwatchdog/src/ui/debugwatchdogui/.tmp/debugwatchdogui1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath,\$$ORIGIN
-LIBS          = $(SUBLIBS) -L./../../lib/ -ldebugwatchdog -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/home/martin/local_lab/dev/debugwatchdog_2/debugwatchdog/src/ui/debugwatchdogui/../../lib/ -ldebugwatchdog -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -95,6 +95,7 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib64/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib64/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib64/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib64/qt5/mkspecs/features/default_pre.prf \
@@ -167,6 +168,7 @@ Makefile: debugwatchdogui.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/l
 		/usr/lib64/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib64/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib64/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib64/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib64/qt5/mkspecs/features/default_pre.prf \
@@ -231,6 +233,7 @@ Makefile: debugwatchdogui.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/l
 /usr/lib64/qt5/mkspecs/features/qt_config.prf:
 /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib64/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib64/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib64/qt5/mkspecs/features/toolchain.prf:
 /usr/lib64/qt5/mkspecs/features/default_pre.prf:
@@ -307,7 +310,7 @@ compiler_moc_header_clean:
 moc_mainwindow.cpp: mainwindow.h \
 		moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I. -I./../../lib -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-redhat-linux -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-redhat-linux/6.3.1/include -I/usr/local/include -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/martin/local_lab/dev/debugwatchdog_2/debugwatchdog/src/ui/debugwatchdogui -I/home/martin/local_lab/dev/debugwatchdog_2/debugwatchdog/src/lib -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-redhat-linux -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-redhat-linux/6.3.1/include -I/usr/local/include -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
