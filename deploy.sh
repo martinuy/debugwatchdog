@@ -41,6 +41,7 @@ cd src
 
 cd ..
 
+rm -rf bin.tar.gz
 rm -rf bin/debugwatchdoglib.h
 rm -rf bin/libdebugwatchdog.so
 rm -rf bin/debugwatchdogtest
@@ -52,3 +53,5 @@ cp src/lib/libdebugwatchdog.so bin/
 cp src/test/debugwatchdogtest bin/
 cp src/driver/debugwatchdogdriver.ko bin/
 cp src/ui/debugwatchdogui/debugwatchdogui bin/
+
+tar cvzf bin.tar.gz bin/
