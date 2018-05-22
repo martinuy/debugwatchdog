@@ -15,12 +15,12 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-	.text
-	.align 8
-	.globl sys_execve_stub_ptregs_64_hook
-	.type sys_execve_stub_ptregs_64_hook, @function
+    .text
+    .align 8
+    .globl sys_execve_stub_ptregs_64_hook
+    .type sys_execve_stub_ptregs_64_hook, @function
 sys_execve_stub_ptregs_64_hook:
-	movq	sys_execve_hook_ptr, %rax
-	jmp		*stub_ptregs_64_ptr
+    movq    sys_execve_hook_ptr, %rax
+    jmp     *stub_ptregs_64_ptr
 
-	.size sys_execve_stub_ptregs_64_hook,.-sys_execve_stub_ptregs_64_hook
+    .size sys_execve_stub_ptregs_64_hook,.-sys_execve_stub_ptregs_64_hook

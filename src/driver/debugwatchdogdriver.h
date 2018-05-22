@@ -38,19 +38,19 @@
 #define DWDRIVER_MAX_PENDING_STOPPED_NOTIFICATIONS 10U
 
 typedef enum dwdriver_watch_state_t {
-	STATE_UNWATCH = DWDRIVER_UNWATCH,
-	STATE_WATCH = DWDRIVER_WATCH
+    STATE_UNWATCH = DWDRIVER_UNWATCH,
+    STATE_WATCH = DWDRIVER_WATCH
 } dwdriver_watch_state_t;
 
 typedef struct dwdriver_watch_process_t {
-	dwdriver_watch_state_t state;
-	const char* process_name;
-	unsigned int process_name_length;
+    dwdriver_watch_state_t state;
+    const char* process_name;
+    unsigned int process_name_length;
 } dwdriver_watch_process_t;
 
 typedef struct dwdriver_stopped_pids_t {
-	pid_t* pids_buffer;
-	unsigned int* pids_buffer_length;
+    pid_t* pids_buffer;
+    unsigned int* pids_buffer_length;
 } dwdriver_stopped_pids_t;
 
 // IOCTLs
