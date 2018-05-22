@@ -103,11 +103,11 @@ long sys_execve_hook(const char __user* filename, const char __user* const __use
 
 	ret = sys_execve_ptr(filename, argv, envp);
 	if (ret != 0L) {
-		goto cleanup;
+		goto execve_filename_fail;
 	}
 
 	if (execve_filename == NULL) {
-		goto cleanup;
+		goto execve_filename_fail;
 	}
 
 	mutex_lock(&global_lock);
@@ -137,7 +137,7 @@ long sys_execve_hook(const char __user* filename, const char __user* const __use
 					if (authoritative_task_ptr != NULL) {
 						stopped_pids_list_node = (stopped_pids_list_node_t*)kmalloc(sizeof(stopped_pids_list_node_t), GFP_KERNEL);
 						if (stopped_pids_list_node == NULL) {
-							goto cleanup;
+							goto add_to_list_fail;
 						}
 						stopped_pids_list_node->pid = current->pid;
 						INIT_LIST_HEAD(&stopped_pids_list_node->list);
@@ -151,9 +151,11 @@ long sys_execve_hook(const char __user* filename, const char __user* const __use
 			}
 		}
 	}
-	goto cleanup;
-cleanup:
+
+add_to_list_fail:
 	mutex_unlock(&global_lock);
+
+execve_filename_fail:
 	if (execve_filename != NULL) {
 		putname_ptr(execve_filename);
 		execve_filename = NULL;

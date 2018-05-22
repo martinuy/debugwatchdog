@@ -143,7 +143,7 @@ long dwlib_initialize(dwlib_process_stopped_callback_t process_stopped_callback)
 
     debugwatchdogdriver_image_buf = mmap(0, debugwatchdogdriver_image_sb.st_size, PROT_READ|PROT_EXEC, MAP_PRIVATE, debugwatchdogdriver_image_fd, 0);
     if (debugwatchdogdriver_image_buf == NULL) {
-    	fatal_error(-1);
+    	handable_fatal_error(-1);
     	goto cleanup;
     }
 
@@ -533,7 +533,7 @@ static char* get_path_to_file_with_base(const char* file) {
 	strcat(path_to_file_with_base, path_to_library_directory);
 	strcat(path_to_file_with_base, "/");
 	strcat(path_to_file_with_base, file);
-	path_to_file_with_base[path_to_file_with_base_length] = 0;
+	path_to_file_with_base[path_to_file_with_base_length-1] = 0;
 end:
 	return path_to_file_with_base;
 }
@@ -548,9 +548,18 @@ static char* get_path_to_library_directory(void) {
 		goto cleanup;
 	}
 	count = readlink("/proc/self/exe", executable_full_path, PATH_MAX);
-	if (count == -1) {
+	/* Fail if we cannot read the link or if the name is too long
+	 * and it was truncated by readlink */
+	if (count == -1 || count == PATH_MAX) {
 		goto cleanup;
 	}
+	/* man page readlink(2) says
+	 *  "readlink() does not append a null byte to buf"
+	 * So we put an explict 0 here to be sure that we will not
+	 * overrun the buffer later
+	 * */
+	executable_full_path[count] = 0;
+
 	executable_full_path_ptr = dirname(executable_full_path);
 	executable_directory_length = strlen(executable_full_path_ptr);
 	ret = (char*)malloc(executable_directory_length + 1);
